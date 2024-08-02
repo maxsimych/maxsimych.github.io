@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Общий результат: Tradersdiaries + XPbee + KasCapital</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tabulator-tables@6.2.1/dist/css/tabulator.min.css"/>
+  <style>
+      .tableHeader {
+          display: none;
+          margin-top: 10rem;
+      }
+
+      .tabulator {
+          background-color: #ffffff;
+      }
+  </style>
+  <script type="module" defer src="./equity.js"></script>
+</head>
+<body>
+<h1>Общий результат: Tradersdiaries + XPbee + KasCapital</h1>
+<main style="display: flex; flex-direction: column">
+  <article style="max-width: 600px">
+    <h2>Инструкция</h2>
+    <p>Данные загруженные считаются локально, и никуда не отправляются!
+
+    <p>1. Для импорта сделок Tradersdiaries, перейдите на страницу <a
+        href="https://tradersdiaries.com/diary/lk/prop/report/deals">сделок</a>,
+      справа вверху нажмите на кнопку "Экспортировать данные" (стрелочка вниз), перейдите на вкладку "скачивание",
+      выберите Отчет - Трейды, Тип - CSV, Ключ - Все. Скачайте файл, и импортируйте на эту страницу, нажав
+      соответствующую кнопку.</p>
+
+    <p>2. Для импорта XPbee Statement обязательно переключите язык cTrader на английской, и укажите часовой пояс UTC+3
+      (московское время).
+      На вкладке Trade, внизу выберите History, выберите Period - All History, справа нажмите Statement, и на
+      открывшейся вкладке Save.
+      Скачайте файл, и импортируйте на эту страницу, нажав соответствующую кнопку.</p>
+
+    <p>3. Для импорта kasCapital Единый счёт HTML, откорйте страницу Единый счёт в личном кабинете Kas Capital.
+      Нажмите клавишу F12 для открытия , на вкладке Элементы, в самом верху нажмите правой кнопкой на текст "&lt;html
+      ...",
+      в меню выберите Копировать - Копировать outerHtml. Создайте на компьютере файл kas.txt и вставьте туда
+      скопированный текст.
+      Сохраните файл и импортируйте на эту страницу, нажав соответствующую кнопку.</p>
+  </article>
+  <div>
+    <button style="cursor:pointer; width: 20rem; margin: 1rem 1rem 0 0;" id="buttonImportTradersdiaries">Импорт
+      Tradersdiaries Терйдов CSV
+    </button>
+    <input type="file" id="inputFileTradersdiaries" style="display: none">
+    <span id="tradersdiariesFileName"></span>
+  </div>
+  <div>
+    <button style="cursor:pointer; width: 20rem; margin: 0 1rem 0 0;" id="buttonImportXpbee">Импорт XPbee Statement
+      (English) CSV
+    </button>
+    <input type="file" id="inputFileXpbee" style="display: none">
+    <span id="xpbeeFileName"></span>
+  </div>
+  <div>
+    <button style="cursor:pointer; width: 20rem; margin: 0 1rem 0 0;" id="buttonImportKas">Импорт Kas Capital Единого
+      счёта HTML
+    </button>
+    <input type="file" id="inputFileKas" style="display: none">
+    <span id="kasFileName"></span>
+  </div>
+  <button disabled style="width: 20rem; margin: 1rem 0 0 0;" id="draw">Расчитать</button>
+  <div id="statsText" style="display: none; flex-direction: column; font-weight: bold">
+    <span>Общий фандинг: <span id="totalFunding"></span></span>
+    <span>Общий пэйаут: <span id="totalPayout"></span></span>
+    <span>Общий депозит: <span id="totalDeposit"></span></span>
+    <span>XP BEE текущий курс $: <span id="currentRate"></span></span>
+  </div>
+  <h2 class="tableHeader">Таблица PnL по сделкам</h2>
+  <div id="equityTableContainer"></div>
+  <div id="equityChartContainer"></div>
+  <h2 class="tableHeader">Таблица PnL по датам</h2>
+  <div id="dailyTableContainer"></div>
+  <div id="dailyChartContainer"></div>
+  <h2 class="tableHeader">Таблица PnL по месяцам</h2>
+  <div id="monthlyTableContainer"></div>
+</main>
+</body>
+</html>
